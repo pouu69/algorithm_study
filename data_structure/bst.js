@@ -88,7 +88,7 @@ BST.prototype = {
     return current;
   },
   remove : function(data){
-    var root = removeNode(this.root, data);
+    var root = this.removeNode(this.root, data);
   },
   removeNode : function(node, data){
     if(node === null){
@@ -109,10 +109,12 @@ BST.prototype = {
         var tempNode = this.getMin(node.right);
         node.data = tempNode.data;
         node.right = this.removeNode(node.right, tempNode.data);
+        tempNode = null;
+        
       }
     }else if(data < node.data){
       node.left = this.removeNode(node.left, data);
-    }else {
+    }else if(data > node.data){
       node.right = this.removeNode(node.right, data);
     }
     return node;
@@ -137,4 +139,5 @@ nums.insert(22);
 nums.insert(53);
 
 console.log('BST travel');
-console.log(nums.getNodeCnt(nums.root));
+console.log(nums.remove(23));
+console.log(nums.preOrder(nums.root));
