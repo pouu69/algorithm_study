@@ -92,7 +92,7 @@ BST.prototype = {
   },
   removeNode : function(node, data){
     if(node === null){
-      return null;
+      return console.log('cannot find node');
     }
     if(data === node.data){
       // 자식이없는 노드
@@ -101,16 +101,15 @@ BST.prototype = {
       }
       // 왼쪽자식이 없는 노드
       if(node.left === null){
-        return node.right;
+        node = node.right;
+      }else if(node.right ===null){    // 오른쪽 자식이없는 노드
+        node = node.left;
+      }else{
+        // 두자식이 없는 노드
+        var tempNode = this.getMin(node.right);
+        node.data = tempNode.data;
+        node.right = this.removeNode(node.right, tempNode.data);
       }
-      // 오른쪽 자식이없는 노드
-      if(node.right ===null){
-        return node.left;
-      }
-      // 두자식이 없는 노드
-      var tempNode = this.getMin(node.right);
-      node.data = tempNode.data;
-      node.right = this.removeNode(node.right, tempNode.data);
     }else if(data < node.data){
       node.left = this.removeNode(node.left, data);
     }else {
