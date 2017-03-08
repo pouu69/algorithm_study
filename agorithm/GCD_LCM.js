@@ -18,6 +18,10 @@ function gcd1(a, b){
 }
 
 // 최소 공배수
+function lcm(a,b){
+ return a*b/gcd1(a,b); 
+}
 var a = gcd(6, 15);
 console.log(a);
-console.log(6*15/a);
+var b = lcm (6,15);
+console.log(b);
